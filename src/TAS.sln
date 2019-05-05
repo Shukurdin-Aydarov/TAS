@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAS", "TAS\TAS.csproj", "{5DCFC1A9-57BB-4F21-BACE-A9D77DAF4A96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAS.Core", "TAS.Core\TAS.Core.csproj", "{B7DED92E-1604-490C-A803-C17AFAEF5DFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DCFC1A9-57BB-4F21-BACE-A9D77DAF4A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DCFC1A9-57BB-4F21-BACE-A9D77DAF4A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DCFC1A9-57BB-4F21-BACE-A9D77DAF4A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DCFC1A9-57BB-4F21-BACE-A9D77DAF4A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DED92E-1604-490C-A803-C17AFAEF5DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DED92E-1604-490C-A803-C17AFAEF5DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DED92E-1604-490C-A803-C17AFAEF5DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DED92E-1604-490C-A803-C17AFAEF5DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E043DEB7-E5DF-4589-A8F3-80CA903F3948}
+	EndGlobalSection
+EndGlobal
