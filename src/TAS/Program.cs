@@ -14,51 +14,73 @@ namespace TAS
 {
     class Program
     {
+        private static string exit = "exit";
         static void Main(string[] args)
         {
             var service = CreateService();
-            var input = string.Empty;
 
             Console.OutputEncoding = Encoding.Unicode;
+            var stop = false;
 
-            while(input != "exit")
+            while(!stop)
             {
                 try
                 {
-                    Console.WriteLine("Please, enter date. For example, 01.05.2019");
-                    Console.WriteLine("Enter 'exit' to close app.");
-
-                    input = Console.ReadLine();
-                    var date = DateTime.ParseExact(input, Constants.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-                    Console.WriteLine();
-
-                    DisplayRates(service.GetRatesAsync(date).Result);
-
-                    Console.WriteLine();
-
+                    stop = Run(service);
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Invalid date format. Please, enter valid date.");
+                    Console.WriteLine("Invalid date format. Please, enter valid date. \n");
                 }
                 catch (RemoteRateSourceException error)
                 {
-                    Console.WriteLine("Oops, error ocurs when downloading rates from remote source. " +
-                        $"See error: {error}");
+                    Console.WriteLine("Oops, error occurred when downloading rates from remote source. " +
+                        $"See error: {error}. \n");
                 }
                 catch (Exception error)
                 {
-                    Console.WriteLine(error);
+                    Console.WriteLine($"{error}. \n");
                 }
             }
+        }
+
+        private static bool Run(IRateService service)
+        {
+            Console.WriteLine(
+                "Please, enter date. For example, 01.05.2019. \n" +
+                "Enter 'exit' to close app.");
+
+            var input = Console.ReadLine();
+
+            if (input == exit)
+                return true;
+
+            var date = DateTime.ParseExact(input, Constants.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+            Console.WriteLine();
+
+            try
+            {
+                DisplayRates(service.GetRatesAsync(date).Result);
+            }
+            catch(AggregateException error)
+            {
+                if (error.InnerException is RemoteRateSourceException)
+                    throw error.InnerException;
+
+                throw error;
+            }
+
+            Console.WriteLine();
+
+            return false;
         }
 
         private static void DisplayRates(Rate[] rates)
         {
             if (rates.Length == 0)
             {
-                Console.WriteLine("Sorry, we have no data for this date.");
+                Console.WriteLine("Sorry, we have no data for this date. \n");
             }
             else
             {
@@ -67,6 +89,7 @@ namespace TAS
             }
         }
 
+        // You can use DI container instead below methods
         private static IRateService CreateService()
         {
             return new RateService(CreateDbContext(connection), CreateRemoteSource());
